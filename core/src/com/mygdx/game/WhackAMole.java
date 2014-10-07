@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -14,9 +16,11 @@ public class WhackAMole implements MiniGame {
     private long lastSpawned;
     private int score;
     private List<Gopher> gopherList;
+    private SpriteBatch batch;
 
     public WhackAMole() {
         gopherList = new ArrayList<Gopher>();
+        batch = new SpriteBatch();
     }
 
     @Override
@@ -26,7 +30,8 @@ public class WhackAMole implements MiniGame {
 
     @Override
     public void tick() {
-        if (lastSpawned < SPAWN_TIME) {
+        float timeSinceLastSpawn = System.currentTimeMillis() - lastSpawned;
+        if (timeSinceLastSpawn > SPAWN_TIME) {
             Random random = new Random();
             float x = random.nextFloat() * 480;
             float y = random.nextFloat() * 320;
@@ -34,5 +39,13 @@ public class WhackAMole implements MiniGame {
             gopherList.add(newGopher);
             lastSpawned = System.currentTimeMillis();
         }
+    }
+
+    public void render() {
+        batch.begin();
+        for (Gopher gopher : gopherList) {
+            batch.draw(gopher.getImage(), gopher.getX(), gopher.getY(), gopher.getWidth(), gopher.getHeight());
+        }
+        batch.end();
     }
 }

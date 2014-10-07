@@ -7,5 +7,6 @@ public interface MiniGame {
 
     public boolean isGameWon();
     public void tick();
+    public void render();
 
 }
