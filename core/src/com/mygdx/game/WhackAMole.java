@@ -1,5 +1,8 @@
 package com.mygdx.game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by wilsonmitchell on 10/7/14.
  */
@@ -9,6 +12,11 @@ public class WhackAMole implements MiniGame {
 
     private long lastSpawned;
     private int score;
+    private List<Gopher> gopherList;
+
+    public WhackAMole() {
+        gopherList = new ArrayList<Gopher>();
+    }
 
     @Override
     public boolean isGameWon() {
