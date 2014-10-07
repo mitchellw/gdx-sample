@@ -36,16 +36,13 @@ public class Gopher {
 
     private float x;
     private float y;
-    private final float width;
-    private final float height;
-    private final Texture image;
+    private final float width = 480 / 10;
+    private final float height = 320 / 10;
+    private final Texture image = new Texture("gopher.jpg");
 
-    public Gopher(final float x, final float y, final float width, final float height, final Texture image) {
+    public Gopher(final float x, final float y) {
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
-        this.image = image;
     }
 
 }

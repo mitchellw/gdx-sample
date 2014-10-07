@@ -24,4 +24,9 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.draw(img, 0, 0);
 		batch.end();
 	}
+
+    @Override
+    public void resize(int width, int height) {
+        super.resize(480, 320);
+    }
 }

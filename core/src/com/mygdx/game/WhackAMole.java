@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by wilsonmitchell on 10/7/14.
@@ -26,7 +27,11 @@ public class WhackAMole implements MiniGame {
     @Override
     public void tick() {
         if (lastSpawned < SPAWN_TIME) {
-            // TODO: Spawn a gopher
+            Random random = new Random();
+            float x = random.nextFloat() * 480;
+            float y = random.nextFloat() * 320;
+            Gopher newGopher = new Gopher(x, y);
+            gopherList.add(newGopher);
             lastSpawned = System.currentTimeMillis();
         }
     }
