@@ -12,6 +12,8 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		currentMiniGame = new WhackAMole();
+        GopherInputProcessor inputProcessor = new GopherInputProcessor(currentMiniGame);
+        Gdx.input.setInputProcessor(inputProcessor);
 	}
 
 	@Override
@@ -25,5 +27,6 @@ public class MyGdxGame extends ApplicationAdapter {
     @Override
     public void resize(int width, int height) {
         super.resize(480, 320);
+        currentMiniGame.resize(width, height);
     }
 }

@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -17,10 +18,38 @@ public class WhackAMole implements MiniGame {
     private int score;
     private List<Gopher> gopherList;
     private SpriteBatch batch;
+    private float screenWidth;
+    private float screenHeight;
 
     public WhackAMole() {
         gopherList = new ArrayList<Gopher>();
         batch = new SpriteBatch();
+    }
+
+    @Override
+    public void resize(float width, float height) {
+        this.screenWidth = width;
+        this.screenHeight = height;
+    }
+
+    @Override
+    public boolean onTouchDown(int screenX, int screenY, int pointer, int button) {
+        float x = screenX / screenWidth * 480;
+        float y = screenHeight - screenY / screenHeight * 320;
+        System.out.println("screenX: " + screenX + ", screenY: " + screenY + ", x: " + x + ", y: " + y);
+        Iterator<Gopher> iterator = gopherList.iterator();
+        while (iterator.hasNext()) {
+            Gopher gopher = iterator.next();
+            float gopherRight = gopher.getX() + gopher.getWidth();
+            float gopherLeft = gopher.getX();
+            float gopherTop = gopher.getY();
+            float gopherBottom = gopher.getY() + gopher.getHeight();
+            if (x > gopherLeft && x < gopherRight && y > gopherTop && y < gopherBottom) {
+                iterator.remove();
+                score++;
+            }
+        }
+        return false;
     }
 
     @Override
